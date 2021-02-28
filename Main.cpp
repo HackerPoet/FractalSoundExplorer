@@ -42,8 +42,10 @@ typedef void (*Fractal)(double&, double&, double, double);
 static Fractal fractal = nullptr;
 
 //Blend modes
-const sf::BlendMode BlendAlpha(sf::BlendMode::SrcAlpha, sf::BlendMode::OneMinusSrcAlpha, sf::BlendMode::Add);
-const sf::BlendMode BlendIgnoreAlpha(sf::BlendMode::One, sf::BlendMode::Zero, sf::BlendMode::Add);
+const sf::BlendMode BlendAlpha(sf::BlendMode::SrcAlpha, sf::BlendMode::OneMinusSrcAlpha, sf::BlendMode::Add,
+                               sf::BlendMode::Zero, sf::BlendMode::One, sf::BlendMode::Add);
+const sf::BlendMode BlendIgnoreAlpha(sf::BlendMode::One, sf::BlendMode::Zero, sf::BlendMode::Add,
+                                     sf::BlendMode::Zero, sf::BlendMode::One, sf::BlendMode::Add);
 
 //Screen utilities
 void ScreenToPt(int x, int y, double& px, double& py) {
@@ -277,7 +279,7 @@ void SetFractal(sf::Shader& shader, int type, Synth& synth) {
 void resize_window(sf::RenderWindow& window, sf::RenderTexture& rt, const sf::ContextSettings& settings, int w, int h) {
   window_w = w;
   window_h = h;
-  rt.create(w, h, settings);
+  rt.create(w, h);
   window.setView(sf::View(sf::FloatRect(0, 0, (float)w, (float)h)));
   frame = 0;
 }
