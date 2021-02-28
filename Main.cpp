@@ -17,6 +17,7 @@ static const int window_h_init = 720;
 static const int starting_fractal = 0;
 static const int max_iters = 1200;
 static const double escape_radius_sq = 1000.0;
+static const char window_name[] = "Fractal Sound Explorer";
 
 //Settings
 static int window_w = window_w_init;
@@ -288,10 +289,10 @@ void make_window(sf::RenderWindow& window, sf::RenderTexture& rt, const sf::Cont
   sf::VideoMode screenSize;
   if (is_fullscreen) {
     screenSize = sf::VideoMode::getDesktopMode();
-    window.create(screenSize, "Mandelbrot Sound", sf::Style::Fullscreen, settings);
+    window.create(screenSize, window_name, sf::Style::Fullscreen, settings);
   } else {
     screenSize = sf::VideoMode(window_w_init, window_h_init, 24);
-    window.create(screenSize, "Mandelbrot Sound", sf::Style::Resize | sf::Style::Close, settings);
+    window.create(screenSize, window_name, sf::Style::Resize | sf::Style::Close, settings);
   }
   resize_window(window, rt, settings, screenSize.width, screenSize.height);
   window.setFramerateLimit(target_fps);
