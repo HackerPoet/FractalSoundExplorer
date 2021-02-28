@@ -325,7 +325,7 @@ int main(int argc, char *argv[]) {
 
   //Load the font
   sf::Font font;
-  if (!font.loadFromFile("Roboto-Medium.ttf")) {
+  if (!font.loadFromFile("RobotoMono-Medium.ttf")) {
     std::cerr << "Failed to load font" << std::endl;
     system("pause");
     return 1;
@@ -367,6 +367,7 @@ int main(int argc, char *argv[]) {
   bool dragging = false;
   bool juliaDrag = false;
   bool takeScreenshot = false;
+  bool showHelpMenu = false;
   sf::Vector2i prevDrag;
   while (window.isOpen()) {
     sf::Event event;
@@ -385,7 +386,7 @@ int main(int argc, char *argv[]) {
           SetFractal(shader, keycode - sf::Keyboard::Num1, synth);
         } else if (keycode == sf::Keyboard::F11) {
           toggle_fullscreen = true;
-        } else if (keycode == sf::Keyboard::S) {
+        } else if (keycode == sf::Keyboard::D) {
           sustain = !sustain;
         } else if (keycode == sf::Keyboard::C) {
           use_color = !use_color;
@@ -406,10 +407,10 @@ int main(int argc, char *argv[]) {
           synth.audio_pause = true;
           hide_orbit = true;
           frame = 0;
-        } else if (keycode == sf::Keyboard::P) {
+        } else if (keycode == sf::Keyboard::S) {
           takeScreenshot = true;
         } else if (keycode == sf::Keyboard::H) {
-          //TODO: Help menu
+          showHelpMenu = !showHelpMenu;
         }
       } else if (event.type == sf::Event::KeyReleased) {
         if (event.key.code == sf::Keyboard::J) {
@@ -543,6 +544,38 @@ int main(int argc, char *argv[]) {
         }
       }
       glEnd();
+    }
+
+    //Draw help menu
+    if (showHelpMenu) {
+      sf::RectangleShape dimRect(sf::Vector2f((float)window_w, (float)window_h));
+      dimRect.setFillColor(sf::Color(0,0,0,128));
+      window.draw(dimRect, sf::RenderStates(BlendAlpha));
+      sf::Text helpMenu;
+      helpMenu.setFont(font);
+      helpMenu.setCharacterSize(24);
+      helpMenu.setFillColor(sf::Color::White);
+      helpMenu.setString(
+        "  H - Toggle Help Menu                Left Mouse - Click or drag to hear orbits\n"
+        "  D - Toggle Audio Dampening        Middle Mouse - Drag to pan view\n"
+        "  C - Toggle Color                   Right Mouse - Stop orbit and sound\n"
+        "F11 - Toggle Fullscreen             Scroll Wheel - Zoom in and out\n"
+        "  S - Save Snapshot\n"
+        "  R - Reset View\n"
+        "  J - Hold down, move mouse, and\n"
+        "      release to make Julia sets.\n"
+        "      Press again to switch back.\n"
+        "  1 - Mandelbrot Set\n"
+        "  2 - Burning Ship\n"
+        "  3 - Feather Fractal\n"
+        "  4 - SFX Fractal\n"
+        "  5 - Hénon Map\n"
+        "  6 - Duffing Map\n"
+        "  7 - Ikeda Map\n"
+        "  8 - Chirikov Map\n"
+      );
+      helpMenu.setPosition(20.0f, 20.0f);
+      window.draw(helpMenu);
     }
 
     //Flip the screen buffer
