@@ -301,7 +301,11 @@ void make_window(sf::RenderWindow& window, sf::RenderTexture& rt, const sf::Cont
 }
 
 //Main entry-point
+#if _WIN32
+INT WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nCmdShow) {
+#else
 int main(int argc, char *argv[]) {
+#endif
   //Make sure shader is supported
   if (!sf::Shader::isAvailable()) {
     std::cerr << "Graphics card does not support shaders" << std::endl;
