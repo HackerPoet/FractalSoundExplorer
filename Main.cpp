@@ -1,12 +1,13 @@
 #define _USE_MATH_DEFINES
 #define _CRT_SECURE_NO_WARNINGS
-#include "WinAudio.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <complex>
 #include <math.h>
 #include <fstream>
+#include <cstring>
 
 //Constants
 static const int target_fps = 60;
@@ -125,9 +126,10 @@ static const Fractal all_fractals[] = {
   chirikov,
 };
 
-//Synthesizer class to inherit Windows Audio.
-class Synth : public WinAudio {
+//Synthesizer class to inherit SoundStream.
+class Synth : public sf::SoundStream {
 public:
+  static const int AUDIO_BUFF_SIZE = 4096;
   bool audio_reset;
   bool audio_pause;
   double volume;
@@ -136,7 +138,7 @@ public:
   double play_nx, play_ny;
   double play_px, play_py;
 
-  Synth(HWND hwnd) : WinAudio(hwnd, sample_rate) {
+  Synth(unsigned long int /*unused*/) {
     audio_reset = true;
     audio_pause = false;
     volume = 8000.0;
@@ -148,6 +150,9 @@ public:
     play_ny = 0.0;
     play_px = 0.0;
     play_py = 0.0;
+
+    initialize(2, sample_rate);
+    setLoop(true);
   }
 
   void SetPoint(double x, double y) {
@@ -156,6 +161,8 @@ public:
     audio_reset = true;
     audio_pause = false;
   }
+
+  virtual void onSeek(sf::Time /*unused*/) override {}
 
   virtual bool onGetData(Chunk& data) override {
     //Setup the chunk info
