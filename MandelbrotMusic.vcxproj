@@ -125,14 +125,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="WinAudio.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="frag.glsl" />
     <None Include="vert.glsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="WinAudio.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,9 +18,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WinAudio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="frag.glsl">
@@ -29,10 +26,5 @@
     <None Include="vert.glsl">
       <Filter>Header Files</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="WinAudio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
