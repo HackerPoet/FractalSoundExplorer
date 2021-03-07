@@ -88,7 +88,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\Program Files\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;opengl32.lib;winmm.lib;gdi32.lib;glu32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-audio-d.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;opengl32.lib;winmm.lib;gdi32.lib;glu32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -120,19 +120,15 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>C:\Program Files\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-s.lib;sfml-system-s.lib;sfml-window-s.lib;opengl32.lib;winmm.lib;gdi32.lib;glu32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-s.lib;sfml-audio-d.lib;sfml-system-s.lib;sfml-window-s.lib;opengl32.lib;winmm.lib;gdi32.lib;glu32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="WinAudio.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="frag.glsl" />
     <None Include="vert.glsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="WinAudio.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
